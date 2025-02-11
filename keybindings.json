@@ -1,0 +1,147 @@
+// Place your key bindings in this file to override the defaults
+[
+  {
+    "key": "enter",
+    "command": "search.action.focusSearchList",
+    "when": "searchViewletVisible && searchInputBoxFocus"
+  },
+  // command and completions navigation with j k
+  // {
+  //   "key": "shift+j",
+  //   "command": "selectNextSuggestion",
+  //   "when": "suggestWidgetVisible && suggestWidgetMultipleSuggestions"
+  // },
+
+  // {
+  //   "key": "shift+k",
+  //   "command": "selectPrevSuggestion",
+  //   "when": "suggestWidgetVisible && suggestWidgetMultipleSuggestions"
+  // },
+  // {
+  //   "key": "shift+y",
+  //   "command": "acceptSelectedSuggestion",
+  //   "when": "suggestWidgetVisible "
+  // },
+
+  {
+    "key": "ctrl+n",
+    "command": "workbench.action.quickOpenNavigateNext",
+    "when": "inQuickOpen"
+  },
+  {
+    "key": "ctrl+p",
+    "command": "workbench.action.quickOpenNavigatePrevious",
+    "when": "inQuickOpen"
+  },
+
+  // NAVIGATION
+  {
+    "key": "tab",
+    "command": "workbench.action.quickOpenLeastRecentlyUsedEditor",
+    "when": "(vim.mode == 'Normal' || vim.mode == 'Visual') && (editorTextFocus || !inputFocus)"
+  },
+
+  // TERMINAL
+  {
+    "key": "ctrl+shift+a",
+    "command": "workbench.action.terminal.focusNext",
+    "when": "terminalFocus"
+  },
+
+  {
+    "key": "ctrl+shift+b",
+    "command": "workbench.action.terminal.focusPrevious",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "shift+j",
+    "command": "workbench.action.togglePanel"
+  },
+  // if terminal is open and not focused shift+j focuses it
+  {
+    "key": "shift+j",
+    "command": "workbench.action.terminal.focus",
+    "when": "!terminalFocus"
+  },
+  // if watn to focus editor instead of termnila keeping it open
+  {
+    "key": "ctrl+shift+j",
+    "command": "workbench.action.focusActiveEditorGroup",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "ctrl+shift+n",
+    "command": "workbench.action.terminal.new",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "ctrl+shift+w",
+    "command": "workbench.action.terminal.kill",
+    "when": "terminalFocus"
+  },
+
+  // FILE TREE
+  {
+    "command": "workbench.action.toggleSidebarVisibility",
+    "key": "ctrl+b"
+  },
+  {
+    "command": "workbench.files.action.focusFilesExplorer",
+    "key": "ctrl+e",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "n",
+    "command": "explorer.newFile",
+    "when": "filesExplorerFocus && !inputFocus"
+  },
+  {
+    "command": "renameFile",
+    "key": "r",
+    "when": "filesExplorerFocus && !inputFocus"
+  },
+  {
+    "key": "shift+n",
+    "command": "explorer.newFolder",
+    "when": "explorerViewletFocus"
+  },
+  {
+    "key": "s",
+    "command": "explorer.openToSide",
+    "when": "filesExplorerFocus && !inputFocus"
+  },
+  {
+    "command": "deleteFile",
+    "key": "d",
+    "when": "filesExplorerFocus && !inputFocus"
+  },
+  {
+    "key": "ctrl+k",
+    "command": "workbench.action.terminal.clear"
+  },
+  {
+    "key": "ctrl+alt+numpad_subtract",
+    "command": "toggleVim"
+  },
+
+  // GIT
+  {
+    "key": "ctrl+g",
+    "command": "workbench.view.scm",
+    "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus)"
+  },
+
+  // ------ leetcode keybindins ------
+  {
+    "key": "ctrl+shift+l ctrl+shift+t",
+    "command": "leetcode.showSolution"
+  },
+  {
+    "key": "ctrl+shift+l ctrl+shift+s",
+    "command": "leetcode.submitSolution"
+  },
+  {
+    "key": "ctrl+shift+l ctrl+shift+d",
+    "command": "leetcode.testSolution"
+  }
+]
