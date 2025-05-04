@@ -1,43 +1,99 @@
-# Load Angular CLI autocompletion.
-# source <(ng completion script)
-open() {
-    local file_path="$1"
-    local dir_path
-    local file_name
+# ~/.bashrc: executed by bash(1) for non-login shells.
+# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
+# for examples
 
-    # Get the directory and file name from the provided path
-    dir_path=$(dirname "$file_path")
-    file_name=$(basename "$file_path")
+case $- in
+    *i*) ;;
+      *) return;;
+esac
 
-    # Save the current directory
-    local original_dir=$(pwd)
+HISTCONTROL=ignoreboth
 
-    # Navigate to the file's directory
-    cd "$dir_path" || return
+shopt -s histappend
 
-    # Open the file with explorer
-    explorer.exe "$file_name"
+HISTSIZE=1000
+HISTFILESIZE=2000
 
-    # Return to the original directory
-    cd "$original_dir" || return
-}
+shopt -s checkwinsize
 
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-chrome() {
-    # Resolve the absolute path
-    resolvedPath=$(realpath "$1")
-    if [ $? -ne 0 ]; then
-        echo "Error: Could not resolve path."
-        return 1
+if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
+    debian_chroot=$(cat /etc/debian_chroot)
+fi
+
+case "$TERM" in
+    xterm-color|*-256color) color_prompt=yes;;
+esac
+
+if [ -n "$force_color_prompt" ]; then
+    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+	# We have color support; assume it's compliant with Ecma-48
+	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+	# a case would tend to support setf rather than setaf.)
+	color_prompt=yes
+    else
+	color_prompt=
     fi
-    # Use start command with Chrome and Profile 1
-    start chrome --profile="profile 1" "$resolvedPath"
-}
+fi
 
-alias ncode='/c/Users/jaoua/AppData/Local/Programs/Microsoft\ VS\ Code/bin/code --profile Neovim'
-alias ls='ls -la'
-alias lsl='ls -l'
-alias pn='pnpm'
-alias google-chrome='"C:\Program Files\Google\Chrome\Application\chrome.exe" --guest'
-eval "$(starship init bash)"
-eval "$(zoxide init --cmd cd bash)"
+if [ "$color_prompt" = yes ]; then
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+else
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+fi
+unset color_prompt force_color_prompt
+
+case "$TERM" in
+xterm*|rxvt*)
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    ;;
+*)
+    ;;
+esac
+
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+alias studio='npx prisma studio'
+alias pdev='npm run dev'
+alias prisma='npx prisma'
+alias rfg='git checkout 772cc0ee5945cd28f9cb4fd6f63335834c611937^ --'
+
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
+
+export PATH="$HOME/.local/bin:$PATH"
+

@@ -1,0 +1,36 @@
+// Zed keymap
+//
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: open default keymap`
+// from the command palette.
+[
+  {
+    "context": "VimControl",
+    "bindings": {
+      "ctrl-e": "project_panel::ToggleFocus", // Toggle sidebar
+      "ctrl-b": "workspace::ToggleLeftDock", // Focus file explorer when editor is focused
+      "ctrl-g": "git_panel::ToggleFocus",
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-l": "workspace::ActivatePaneRight",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-j": "workspace::ActivatePaneDown",
+      "space w": "workspace::Save",
+      "space f f": "file_finder::Toggle",
+      "space f g": "pane::DeploySearch",
+      "space c n": "editor::GoToDiagnostic",
+      "space c p": "editor::GoToPreviousDiagnostic"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == normal",
+    "bindings": {
+      "tab": "tab_switcher::Toggle"
+    }
+  },
+  {
+    "context": "Editor && vim_mode != insert",
+    "bindings": {}
+  }
+]
